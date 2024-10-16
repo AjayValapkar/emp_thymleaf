@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+	rel="stylesheet">
+
+</head>
+<body class="bg-white p-5">
+	<a href="/" class="text-red-700">Back</a>
+	<h1 class="text-2xl font-bold ">Employee List</h1>
+	<a href="/employee"
+		class="my-4 float-right inline-block text-white bg-blue-500 px-4 py-2 rounded">Add
+		New Employee</a>
+	<table class="min-w-full bg-white shadow-md rounded-lg">
+		<thead>
+			<tr class="bg-gray-600 text-white">
+				<th class="px-4 py-2">ID</th>
+				<th class="px-4 py-2">Name</th>
+				<th class="px-4 py-2">Email</th>
+				<th class="px-4 py-2">Mobile N0.</th>
+				<th class="px-4 py-2">Password</th>
+				<th class="px-4 py-2">CTC</th>
+				<th class="px-4 py-2">Attendance</th>
+				<th class="px-4 py-2">Leave</th>
+				<th class="px-4 py-2">Address</th>
+				<th class="px-4 py-2">Payment</th>
+				<th class="px-4 py-2">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="employee : ${employee}" class="hover:bg-gray-100">
+				<td class="border px-4 py-2" th:text="${employee.empId}"></td>
+				<td class="border px-4 py-2" th:text="${employee.empName}"></td>
+				<td class="border px-4 py-2" th:text="${employee.empEmail}"></td>
+				<td class="border px-4 py-2" th:text="${employee.empMob}"></td>
+				<td class="border px-4 py-2" th:text="${employee.password}"></td>
+				<td class="border px-4 py-2" th:text="${employee.salary}"></td>
+				<td class="border px-4 py-2"><a
+					th:href="@{/attendace/{empId}(empId=${employee.empId})}"
+					class="text-blue-500">Attendance</a></td>
+				<td class="border px-4 py-2"><a
+					th:href="@{/leaves/{empId}(empId=${employee.empId})}"
+					class="text-blue-500">Leaves</a></td>
+				<td class="border px-4 py-2"><a
+					th:href="@{/address/{empId}(empId=${employee.empId})}"
+					class="text-blue-500">Address</a></td>
+				<td class="border px-4 py-2"><a
+					th:href="@{/pay/{empId}(empId=${employee.empId})}"
+					class="text-blue-500">Make Payment</a></td>
+				<td class="border px-4 py-2"><a
+					th:href="@{/getEmp/{empId}(empId=${employee.empId})}"
+					class="text-blue-500">Edit</a> <a
+					th:href="@{/delete/emp/{empId}(empId=${employee.empId})}"
+					class="text-red-500">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+
+</body>
+</html>

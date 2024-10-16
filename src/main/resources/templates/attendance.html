@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+	rel="stylesheet">
+
+</head>
+<body class="bg-white p-5">
+	<a th:href="@{/}" class="text-red-700">Back</a>
+	<h1 class="text-2xl font-bold mb-4">Employee Attedance</h1>
+	<table class="min-w-full bg-white shadow-md rounded-lg">
+		<thead>
+			<tr class="bg-gray-600 text-white">
+				<th class="px-4 py-2">ID</th>
+				<th class="px-4 py-2">Name</th>
+				<th class="px-4 py-2">Punch In</th>
+				<th class="px-4 py-2">Punch Out</th>
+				<th class="px-4 py-2">Total hours</th>
+
+			</tr>
+		</thead> 
+		<tbody>
+			<tr th:each="add : ${attendace}" class="hover:bg-gray-100">
+				<td class="border px-4 py-2" th:text="${employee.empId}"></td>
+				<td class="border px-4 py-2" th:text="${employee.empName}"></td>
+				<td class="border px-4 py-2" th:text="${add.punchIn}"></td>
+				<td class="border px-4 py-2" th:text="${add.punchOut}"></td>
+				<td class="border px-4 py-2" th:text="${add.totalHours} +  Hr."><p>Hr.</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+</body>
+</html>

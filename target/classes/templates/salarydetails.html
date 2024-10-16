@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+	rel="stylesheet">
+
+</head>
+<body class="bg-gray-100 p-5">
+	<h1 class="text-2xl font-bold mb-4">My Salary</h1>
+	<table class="min-w-full bg-white shadow-md rounded-lg">
+		<thead>
+			<tr class="bg-gray-200">
+				<th class="px-4 py-2">Month</th>
+				<th class="px-4 py-2">Payment Date</th>
+				<th class="px-4 py-2">No.Of Full Day Leaves</th>
+				<th class="px-4 py-2">No.Of Half Day Leaves</th>
+				<th class="px-4 py-2">PF</th>
+				<th class="px-4 py-2">Tax</th>
+				<th class="px-4 py-2">Actual Amount Credited</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="add : ${payment}" class="hover:bg-gray-100">
+				<td class="border px-4 py-2" th:text="${add.month}"></td>
+				<td class="border px-4 py-2" th:text="${add.payDate}"></td>
+				<td class="border px-4 py-2" th:text="${add.fullLeave}"></td>
+				<td class="border px-4 py-2" th:text="${add.halfLeave}"></td>
+				<td class="border px-4 py-2" th:text="${add.monthPf}"></td>
+				<td class="border px-4 py-2" th:text="${add.monthTax}"></td>
+				<td class="border px-4 py-2" th:text="${add.takeHomeSalary}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+</body>
+</html>

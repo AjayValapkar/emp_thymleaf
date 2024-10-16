@@ -1,0 +1,80 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add New Employee</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+	rel="stylesheet">
+
+</head>
+<body class="bg-gray-200 p-5 ">
+	<div class="flex flex-row p-4">
+		<form method="POST" th:action="@{/leaveReq/{empId}(empId=${empId})}"
+			class="basis-1/2 p-8 shadow-xl bg-gray-100" th:object="${leave}">
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" />
+			<p th:text="${msg}" class="text-red-700"></p>
+			<div class="row-span-3">
+				<h2>One Day Leave:</h2>
+				<input type="date" id="meeting-time" th:field="*{singleDay}"
+					class="w-80 form-control p-2 mb-4 col-8" name="punch-out"
+					min="2018-06-07T00:00" max="2040-06-14T00:00" />
+				<h2>Leave Category</h2>
+				<select class="form-control w-80 mb-4 col-8 p-2"
+					th:field="*{leaveCategory}">
+					<option value="Full Day Leave">Full Day</option>
+					<option value="Half Day Leave">Half Day</option>
+					<option value="Short Leave">Short Leave</option>
+				</select>
+			</div>
+
+			<div class="col-span-2">
+				<h2 class="text-center text-red-700 my-4">FOR MORE DAYS</h2>
+				<h2>Leave Date From :</h2>
+				<input type="date" id="meeting-time" th:field="*{leaveFrom}"
+					class="w-80 form-control p-2 mb-4 col-8" name="punch-out"
+					min="2018-06-07T00:00" max="2040-06-14T00:00" />
+				<h2>Leave Date To:</h2>
+				<input type="date" id="meeting-time" th:field="*{leaveTo}"
+					class="w-80 form-control p-2 mb-4 col-8" name="punch-out"
+					min="2018-06-07T00:00" max="2040-06-14T00:00" />
+
+				<h2>Reason for Leave</h2>
+				<input type="text" th:field="*{reason}"
+					class="w-80 form-control p-2 mb-4 col-8" required> <br>
+				<button type="submit"
+					class="btn btn-info bg-gray-600 text-white bg-blue-600 rounded p-2 col-4">Apply
+					Leave</button>
+			</div>
+
+		</form>
+		<div class="basic-1/2 p-4 ">
+			<h2 class="text-black text-xl my-4">Previously Applied Leave</h2>
+			<table class="w-full bg-white shadow-md rounded-lg">
+				<thead>
+					<tr class="bg-gray-100">
+						<th class="px-4 py-2">Leave From</th>
+						<th class="px-4 py-2">Leave To</th>
+						<th class="px-4 py-2">Single Day</th>
+						<th class="px-4 py-2">Type</th>
+						<th class="px-4 py-2">Reason</th>
+						<th class="px-4 py-2">Status</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="add : ${leaves}" class="hover:bg-gray-100">
+						<td class="border px-4 py-2" th:text="${add.leaveFrom}"></td>
+						<td class="border px-4 py-2" th:text="${add.leaveTo}"></td>
+						<td class="border px-4 py-2" th:text="${add.singleDay}"></td>
+						<td class="border px-4 py-2" th:text="${add.leaveCategory}"></td>
+						<td class="border px-4 py-2" th:text="${add.reason}"></td>
+						<td class="border px-4 py-2"
+							th:text="${add.status ? 'Accepted' : 'Rejected'}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>

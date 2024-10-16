@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+	rel="stylesheet">
+
+</head>
+<body class="h-screen bg-gray-200 flex flex-row justify-center p-10">
+
+	<div class="basis-1/2 bg-gray-100  p-4 shadow-xl">
+		<h2 class="text-center text-xl text-blue-700">Punch Here</h2>
+		<form th:action="@{/punch/{empId}(empId=${employee.empId})}"
+			class="m-2" th:object="${empdatetime}" method="POST">
+
+			<p th:text="${error}" class="text-red-600"></p>
+			<br> <input type="datetime-local" th:field="*{punchIn}"
+				id="meeting-time" class="w-80 form-control p-2 mb-4 col-8"
+				name="punch-in" min="2018-06-07T00:00" th:value="${time}"
+				max="2040-06-14T00:00" /> <br>
+			<button type="submit"
+				class="btn btn-info bg-gray-600 text-white p-2 bg-green-800 rounded col-4">PUNCH
+				IN</button>
+			<br>
+		</form>
+		<form
+			th:action="@{/punchOut/{empId}/{id}(empId=${employee.empId},id=${id})}"
+			class="mt-6 ml-2" th:object="${empdatetime}" method="POST">
+
+			<br>
+			<p th:text="${msg}" class="text-red-600"></p>
+			<input type="datetime-local" th:field="*{punchOut}" id="meeting-time"
+				class="w-80 form-control p-2 mb-4 col-8" name="punch-out"
+				min="2018-06-07T00:00" max="2040-06-14T00:00" /> <br> <br>
+			<button type="submit"
+				class="btn btn-info bg-gray-600 text-white p-2 -mt-8 col-4 bg-red-800 rounded">PUNCH
+				OUT</button>
+		</form>
+	</div>
+
+	<div class="basis-1/2 pl-16 pr-16 pt-4">
+		<h2 class="text-right text-xl text-black" >Punch In <p class="text-red-700" th:text="${time}"></p></h2>
+		<h2 class="text-center text-xl text-black">My Profile</h2>
+		<div class="mt-10">
+			<a th:href="@{/leave/{empId}(empId=${empId})}"
+				class="text-white ml-8 p-2 bg-blue-700 rounded">My Leave</a> <a
+				th:href="@{/payment/{empId}(empId=${employee.empId})}"
+				class="text-white ml-10 p-2 bg-green-700 rounded">Salary Details</a>
+		</div>
+	</div>
+</body>
+
+</html>

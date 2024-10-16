@@ -1,0 +1,48 @@
+	<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+	rel="stylesheet">
+
+</head>
+<body class="bg-white p-5">
+	<a th:href="@{/}" class="text-red-700">Back</a>
+	<h1 class="text-2xl font-bold mb-4">Employee Leaves</h1>
+	<table class="min-w-full bg-white shadow-md rounded-lg">
+		<thead>
+			<tr class="bg-gray-600 text-white">
+				<th class="px-4 py-2">Leave From</th>
+				<th class="px-4 py-2">Leave To</th>
+				<th class="px-4 py-2">Single Day</th>
+				<th class="px-4 py-2">Type</th>
+				<th class="px-4 py-2">Reason</th>
+				<th class="px-4 py-2">Status</th>
+				<th class="px-4 py-2">Action</th>
+				<th class="px-4 py-2">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="add : ${leaves}" class="hover:bg-gray-100">
+				<td class="border px-4 py-2" th:text="${add.leaveFrom}"></td>
+				<td class="border px-4 py-2" th:text="${add.leaveTo}"></td>
+				<td class="border px-4 py-2" th:text="${add.singleDay}"></td>
+				<td class="border px-4 py-2" th:text="${add.leaveCategory}"></td>
+				<td class="border px-4 py-2" th:text="${add.reason}"></td>
+				<td class="border px-4 py-2" th:text="${add.status ? 'Accepted' : 'Rejected'}"></td>
+				<td class="border px-4 py-2"><a
+					th:href="@{/leave/{status}/{id}/{empId}(id=${add.id},status=true,empId=${empId})}"
+					class="text-blue-500">Accept</a></td>
+				<td class="border px-4 py-2"><a
+					th:href="@{/leave/{status}/{id}/{empId}(id=${add.id},status=false,empId=${empId})}"
+					class="text-red-500">Reject</a>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+</body>
+</html>

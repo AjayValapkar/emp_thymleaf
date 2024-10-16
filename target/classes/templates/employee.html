@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add New Employee</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+	rel="stylesheet">
+
+</head>
+<body class="bg-gray-100 p-5 flex justify-center">
+	<a href="/" class="text-red-700 pr-10 ">Back</a>
+	<form th:action="@{/add}" th:object="${employee}"
+		class="shadow-xl p-8 bg-gray-100 rounded" method="POST">
+		<h2 class="text-center my-4 text-xl">New Employee</h2>
+		<input type="hidden" th:field="*{empId}" />
+		<h2>Enter Name :</h2>
+		<input type="text" th:field="*{empName}"
+			class="w-80 form-control p-2 mb-4 col-8" required>
+		<h2>Enter Email</h2>
+		<input type="email" pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+			title="Please enter a valid Gmail address" th:field="*{empEmail}"
+			class="w-80 form-control p-2 mb-4 col-8" required>
+		<h2>Enter Mobile</h2>
+		<input type="text" pattern="[0-9]{10}"
+			title="Mobile number must be exactly 10 digits" th:field="*{empMob}"
+			class="w-80 form-control p-2 mb-4 col-8" required> <br>
+		<h2>Enter CTC</h2>
+		<input type="number" th:field="*{salary}" step="0.01"
+			class="w-80 form-control p-2 mb-4 col-8" required> <br>
+		<button type="submit"
+			class="btn rounded bg-blue-600 btn-info bg-gray-600 text-white p-2 col-4">SAVE
+			EMPLOYEE</button>
+		<br>
+
+	</form>
+	<br>
+
+</body>
+</html>

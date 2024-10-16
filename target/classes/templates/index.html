@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+	rel="stylesheet">
+
+</head>
+<body class="bg-white">
+	<div class=" ">
+		<div class="grid grid-cols-6 h-screen ">
+			<div class="h-full ">
+				<div class="p-4 bg-gray-500 text-white">Admin DashBoard</div>
+				<ul class="bg-red-700 p-4 text-white h-screen gap-2">
+					<li class="my-4"><a th:href="@{/employee}">New Employee</a></li>
+					<li class="my-4"><a th:href="@{/holidays}">Holidays</a></li>
+					<li class="my-4"><a th:href="@{/attendance}">Attendance</a></li>
+					<li class="my-4"><a th:href="@{/attendance}">Payment</a></li>
+				</ul>
+
+
+			</div>
+			<div class="border col-span-5 p-8">
+				<div th:if="${contentFragment == 'newEmployee'}">
+					<h2 class="text-xl">New Employee</h2>
+					<form th:action="@{/add}" th:object="${employee}"
+						class="p-8 rounded" method="POST">
+
+						<input type="hidden" th:field="*{empId}" />
+						<div class="grid grid-cols-3 gap-4">
+							<div>
+								<input type="text" th:field="*{empName}"
+									placeholder="Enter Name"
+									class="w-full bg-gray-100 rounded mt-2 form-control p-2 mb-4 col-8"
+									required>
+							</div>
+							<div>
+								<input type="email" pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+									title="Please enter a valid Gmail address"
+									th:field="*{empEmail}" placeholder="Enter Email"
+									class="w-full bg-gray-100 rounded mt-2 form-control p-2 mb-4 col-8"
+									required>
+							</div>
+							<div>
+								<input type="text" pattern="[0-9]{10}"
+									title="Mobile number must be exactly 10 digits"
+									th:field="*{empMob}" placeholder="Enter Mobile"
+									class="w-full bg-gray-100 rounded mt-2 form-control p-2 mb-4 col-8"
+									required> <br>
+							</div>
+							<div>
+								<input type="number" th:field="*{salary}" step="0.01"
+									placeholder="Enter CTC"
+									class="w-full bg-gray-100 rounded mt-2 form-control p-2 mb-4 col-8"
+									required> <br>
+							</div>
+							<button type="submit"
+								class="btn mt-2 w-40 rounded bg-green-600 btn-info bg-gray-600 text-white p-2 mb-4 col-4">
+								Save Employee</button>
+						</div>
+						<br>
+					</form>
+					<div class="mt-0 p-4">
+						<table class="min-w-full bg-white shadow-md rounded-lg">
+							<thead>
+								<tr class="bg-red-400 text-black">
+									<th class="px-4 py-2">Name</th>
+									<th class="px-4 py-2">Email</th>
+									<th class="px-4 py-2">Mobile</th>
+									<th class="px-4 py-2">CTC</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+				<div th:if="${contentFragment == 'holidays'}">
+					<h2 class="text-xl text-black text-bold">New Holiday</h2>
+					<form action="" class="grid grid-cols-3 gap-8 p-4">
+						<div>
+							<input type="text" pattern="[0-9]{10}" placeholder="Holiday Name"
+								title="Mobile number must be exactly 10 digits"
+								class="w-full bg-gray-100 rounded my-2 form-control p-2 mb-4 col-8"
+								required> <br>
+						</div>
+						<div>
+							<input type="date" id="meeting-time" placeholder="Holiday Date"
+								class="w-full bg-gray-100 rounded my-2 form-control p-2 mb-4 col-8"
+								name="punch-out" min="2018-06-07T00:00" max="2040-06-14T00:00" />
+						</div>
+						<div>
+							<button
+								class="w-40 bg-green-600 rounded text-white my-2 form-control p-2 mb-4 col-8">
+								Add Holiday</button>
+						</div>
+					</form>
+					<div class="mt-8 p-4">
+						<table class="min-w-full bg-white shadow-md rounded-lg">
+							<thead>
+								<tr class="bg-red-400 text-black">
+									<th class="px-4 py-2">Month</th>
+									<th class="px-4 py-2">Date</th>
+									<th class="px-4 py-2">Desc.</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+				<div th:if="${contentFragment == 'attendance'}">
+					<h2 class="text-xl text-black text-bold">Attendance</h2>
+					<form action="" class="grid grid-cols-4 gap-8 p-4">
+
+						<div>
+							<select
+								class="w-full bg-gray-100 rounded my-2 form-control p-2 mb-4 col-8">
+								<option value="Full Day Leave">Full Day</option>
+								<option value="Half Day Leave">Half Day</option>
+								<option value="Short Leave">Short Leave</option>
+							</select>
+
+						</div>
+						<div>
+							<select
+								class="w-full bg-gray-100 rounded my-2 form-control p-2 mb-4 col-8">
+								<option value="Full Day Leave">Full Day</option>
+								<option value="Half Day Leave">Half Day</option>
+								<option value="Short Leave">Short Leave</option>
+							</select>
+
+						</div>
+						<div>
+							<button
+								class="w-60 bg-green-600 rounded text-white my-2 form-control p-2 mb-4 col-8">
+								Generate Attendance</button>
+						</div>
+					</form>
+					<div class="mt-0 p-4">
+						<table class="min-w-full bg-white shadow-md rounded-lg">
+							<thead>
+								<tr class="bg-red-400 text-black">
+									<th class="px-4 py-2">Name</th>
+									<th class="px-4 py-2">Email</th>
+									<th class="px-4 py-2">Mobile</th>
+									<th class="px-4 py-2">CTC</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+</html>
