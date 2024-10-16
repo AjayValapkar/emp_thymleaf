@@ -21,7 +21,7 @@ public class EmployeeController {
 	@PostMapping("/add")
 	public String addNewEmployee(@ModelAttribute("employee") Employee emp) {
 		String success = empService.addNewEmp(emp);
-		return "redirect:/";
+		return "redirect:/employee";
 	}
 
 	@GetMapping("/")
@@ -34,6 +34,7 @@ public class EmployeeController {
 	public String newEmployee(Model model) {
 		model.addAttribute("employee", new Employee());
 		model.addAttribute("contentFragment", "newEmployee");
+		model.addAttribute("employees", empService.fetchAllEmp());
 		return "index";
 	}
 

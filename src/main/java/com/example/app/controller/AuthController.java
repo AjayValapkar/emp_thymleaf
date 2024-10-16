@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.example.app.models.Holiday;
+import com.example.app.service.LeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,9 @@ public class AuthController {
 
 	@Autowired
 	EmploeeService empService;
+
+	@Autowired
+	LeaveService leaveService;
 
 	@RequestMapping("/loginPanel")
 	public String dash(Model model) {
@@ -91,12 +96,15 @@ public class AuthController {
 	@GetMapping("/holidays")
 	public String holidays(Model model) {
 		model.addAttribute("contentFragment", "holidays");
+		model.addAttribute("vacation", leaveService.getAllHoliday());
+		model.addAttribute("holiday", new Holiday());
 		return "index";
 	}
 
 	@GetMapping("/attendance")
 	public String attendance(Model model) {
 		model.addAttribute("contentFragment", "attendance");
+
 		return "index";
 	}
 

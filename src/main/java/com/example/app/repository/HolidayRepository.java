@@ -1,0 +1,7 @@
+package com.example.app.repository;
+
+import com.example.app.models.Holiday;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface HolidayRepository extends JpaRepository<Holiday, Long> {
+}

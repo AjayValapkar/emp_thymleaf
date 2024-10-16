@@ -70,10 +70,18 @@
 									<th class="px-4 py-2">Email</th>
 									<th class="px-4 py-2">Mobile</th>
 									<th class="px-4 py-2">CTC</th>
+									<th class="px-4 py-2">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
-
+							<tr th:each="add : ${employees}" class="hover:bg-gray-100">
+								<td class="border px-4 py-2" th:text="${add.empName}"></td>
+								<td class="border px-4 py-2" th:text="${add.empEmail}"></td>
+								<td class="border px-4 py-2" th:text="${add.empMob}"></td>
+								<td class="border px-4 py-2" th:text="${add.salary}"></td>
+								<td class="border px-4 py-2"><a
+										class="text-blue-500">Delete</a></td>
+							</tr>
 							</tbody>
 						</table>
 
@@ -81,20 +89,21 @@
 				</div>
 				<div th:if="${contentFragment == 'holidays'}">
 					<h2 class="text-xl text-black text-bold">New Holiday</h2>
-					<form action="" class="grid grid-cols-3 gap-8 p-4">
+					<form th:action="@{/add/holiday}" class="grid grid-cols-3 gap-8 p-4" th:object="${holiday}">
+						<input type="hidden" th:field="*{id}" />
 						<div>
-							<input type="text" pattern="[0-9]{10}" placeholder="Holiday Name"
+							<input type="text" th:field="*{holidayTitle}" placeholder="Holiday Name"
 								title="Mobile number must be exactly 10 digits"
 								class="w-full bg-gray-100 rounded my-2 form-control p-2 mb-4 col-8"
 								required> <br>
 						</div>
 						<div>
-							<input type="date" id="meeting-time" placeholder="Holiday Date"
+							<input type="date" th:field="*{date}" id="meeting-time" placeholder="Holiday Date"
 								class="w-full bg-gray-100 rounded my-2 form-control p-2 mb-4 col-8"
 								name="punch-out" min="2018-06-07T00:00" max="2040-06-14T00:00" />
 						</div>
 						<div>
-							<button
+							<button type="submit"
 								class="w-40 bg-green-600 rounded text-white my-2 form-control p-2 mb-4 col-8">
 								Add Holiday</button>
 						</div>
@@ -109,7 +118,13 @@
 								</tr>
 							</thead>
 							<tbody>
-
+							<tr th:each="add : ${vacation}" class="hover:bg-gray-100">
+								<td class="border px-4 py-2" th:text="${add.month}"></td>
+								<td class="border px-4 py-2" th:text="${add.date}"></td>
+								<td class="border px-4 py-2" th:text="${add.title}"></td>
+								<td class="border px-4 py-2"><a
+										class="text-blue-500">Delete</a></td>
+							</tr>
 							</tbody>
 						</table>
 

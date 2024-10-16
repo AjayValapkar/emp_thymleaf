@@ -2,8 +2,13 @@ package com.example.app.service.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.example.app.dto.HoildayDto;
+import com.example.app.models.Holiday;
+import com.example.app.repository.HolidayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +26,9 @@ public class LeaveServiceImpl implements LeaveService {
 
 	@Autowired
 	EmployeeRepository empRepo;
+
+	@Autowired
+	HolidayRepository holidayRepository;
 
 	@Override
 	public String requestLeave(Leave leave, Integer empId) {
@@ -74,6 +82,23 @@ public class LeaveServiceImpl implements LeaveService {
 
 		return emp.getLeaves();
 	}
-	
+
+	@Override
+	public String newHoliday(Holiday holiday) {
+		holidayRepository.save(holiday);
+		return "Succefully added new Holiday";
+	}
+
+	@Override
+	public List<HoildayDto> getAllHoliday() {
+		List<HoildayDto> holiday = new ArrayList<>();
+		List<Holiday> vacation = holidayRepository.findAll();
+		for(Holiday holi: vacation){
+			HoildayDto newDto = new HoildayDto(holi.getId(), Month.of(holi.getDate().getMonthValue()),holi.getHolidayTitle(),holi.getDate());
+			holiday.add(newDto);
+		}
+		return holiday;
+	}
+
 
 }

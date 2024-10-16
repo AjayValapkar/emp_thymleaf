@@ -1,6 +1,7 @@
 package com.example.app.controller;
 
 
+import com.example.app.models.Holiday;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,5 +49,14 @@ public class LeaveController {
 		leaveSer.responseLeave(id, status);
 		return "redirect:/leaves/" + empId;
 	}
+
+	@PostMapping("/add/holiday")
+	public String newHoliday(@ModelAttribute(value = "holiday")Holiday holiday,Model model){
+		String msg = leaveSer.newHoliday(holiday);
+		model.addAttribute("hoolidaymsg", msg);
+		return "redirect:/holidays";
+	}
+
+
 
 }
