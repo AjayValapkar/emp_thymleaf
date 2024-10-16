@@ -5,6 +5,7 @@ import com.example.app.models.Holiday;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,12 +51,17 @@ public class LeaveController {
 		return "redirect:/leaves/" + empId;
 	}
 
-	@PostMapping("/add/holiday")
-	public String newHoliday(@ModelAttribute(value = "holiday")Holiday holiday,Model model){
+	@PostMapping("/add/holidays")
+	public String newHoliday(@ModelAttribute("holiday") Holiday holiday, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			// Handle errors
+			return "errorView"; // Replace with your actual error view
+		}
 		String msg = leaveSer.newHoliday(holiday);
-		model.addAttribute("hoolidaymsg", msg);
+		model.addAttribute("holidaymsg", msg);
 		return "redirect:/holidays";
 	}
+
 
 
 

@@ -85,7 +85,11 @@ public class LeaveServiceImpl implements LeaveService {
 
 	@Override
 	public String newHoliday(Holiday holiday) {
-		holidayRepository.save(holiday);
+		try{
+			holidayRepository.save(holiday);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 		return "Succefully added new Holiday";
 	}
 

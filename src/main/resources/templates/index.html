@@ -89,11 +89,10 @@
 				</div>
 				<div th:if="${contentFragment == 'holidays'}">
 					<h2 class="text-xl text-black text-bold">New Holiday</h2>
-					<form th:action="@{/add/holiday}" class="grid grid-cols-3 gap-8 p-4" th:object="${holiday}">
+					<form th:action="@{/add/holidays}" class="grid grid-cols-3 gap-8 p-4" method="POST" th:object="${holiday}">
 						<input type="hidden" th:field="*{id}" />
 						<div>
 							<input type="text" th:field="*{holidayTitle}" placeholder="Holiday Name"
-								title="Mobile number must be exactly 10 digits"
 								class="w-full bg-gray-100 rounded my-2 form-control p-2 mb-4 col-8"
 								required> <br>
 						</div>
@@ -114,7 +113,8 @@
 								<tr class="bg-red-400 text-black">
 									<th class="px-4 py-2">Month</th>
 									<th class="px-4 py-2">Date</th>
-									<th class="px-4 py-2">Desc.</th>
+									<th class="px-4 py-2">Title</th>
+									<th class="px-4 py-2">Action</th>
 								</tr>
 							</thead>
 							<tbody>

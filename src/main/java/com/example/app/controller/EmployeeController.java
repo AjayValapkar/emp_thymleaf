@@ -27,7 +27,7 @@ public class EmployeeController {
 	@GetMapping("/")
 	public String fetchEmployee(Model model) {
 		model.addAttribute("employee", empService.fetchAllEmp());
-		return "index";
+		return "redirect:/employee";
 	}
 
 	@RequestMapping("/employee")
