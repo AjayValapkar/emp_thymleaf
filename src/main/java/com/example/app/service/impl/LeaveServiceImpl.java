@@ -3,9 +3,11 @@ package com.example.app.service.impl;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.app.dto.EmpAttendace;
 import com.example.app.dto.HoildayDto;
 import com.example.app.models.Holiday;
 import com.example.app.repository.HolidayRepository;
@@ -17,6 +19,8 @@ import com.example.app.models.Leave;
 import com.example.app.repository.EmployeeRepository;
 import com.example.app.repository.LeaveRepository;
 import com.example.app.service.LeaveService;
+
+import static org.hibernate.internal.util.collections.ArrayHelper.forEach;
 
 @Service
 public class LeaveServiceImpl implements LeaveService {
@@ -102,6 +106,17 @@ public class LeaveServiceImpl implements LeaveService {
 			holiday.add(newDto);
 		}
 		return holiday;
+	}
+
+	@Override
+	public List<List<EmpAttendace>> allAttendance(Month month, Year year) {
+		LocalDate start = LocalDate.of(year.getValue(), month.getValue(), 1);
+        LocalDate end = start.withDayOfMonth(start.lengthOfMonth());
+		List<Employee> employee = empRepo.findAll();
+		for(Employee emp: employee){
+
+		}
+		return null;
 	}
 
 

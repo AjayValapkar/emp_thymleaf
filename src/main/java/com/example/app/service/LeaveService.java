@@ -1,7 +1,10 @@
 package com.example.app.service;
 
+import java.time.Month;
+import java.time.Year;
 import java.util.List;
 
+import com.example.app.dto.EmpAttendace;
 import com.example.app.dto.HoildayDto;
 import com.example.app.models.Holiday;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,6 @@ public interface LeaveService {
 
 	List<HoildayDto> getAllHoliday();
 
-	
 
+    List<List<EmpAttendace>> allAttendance(Month month, Year year);
 }

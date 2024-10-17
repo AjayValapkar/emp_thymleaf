@@ -74,14 +74,17 @@
 								</tr>
 							</thead>
 							<tbody>
-							<tr th:each="add : ${employees}" class="hover:bg-gray-100">
-								<td class="border px-4 py-2" th:text="${add.empName}"></td>
-								<td class="border px-4 py-2" th:text="${add.empEmail}"></td>
-								<td class="border px-4 py-2" th:text="${add.empMob}"></td>
-								<td class="border px-4 py-2" th:text="${add.salary}"></td>
-								<td class="border px-4 py-2"><a
-										class="text-blue-500">Delete</a></td>
-							</tr>
+
+                                <tr th:each="add : ${employees}" class="hover:bg-gray-100" th:onclick="|window.location.href='@{/getEmp/{empId}(empId=${add.empId})}'|">
+
+                                    <td class="border px-4 py-2" th:text="${add.empName}"></td>
+                                    <td class="border px-4 py-2" th:text="${add.empEmail}"></td>
+                                    <td class="border px-4 py-2" th:text="${add.empMob}"></td>
+                                    <td class="border px-4 py-2" th:text="${add.salary}"></td>
+                                    <td class="border px-4 py-2"><a th:href="@{/delete/emp/{empId}(empId=${add.empId}	)}" class="text-blue-500">Delete</a></td>
+
+                                </tr>
+
 							</tbody>
 						</table>
 
@@ -139,7 +142,6 @@
 								class="w-full bg-gray-100 rounded my-2 form-control p-2 mb-4 col-8">
 								<option value="Full Day Leave">Full Day</option>
 								<option value="Half Day Leave">Half Day</option>
-								<option value="Short Leave">Short Leave</option>
 							</select>
 
 						</div>
@@ -148,7 +150,6 @@
 								class="w-full bg-gray-100 rounded my-2 form-control p-2 mb-4 col-8">
 								<option value="Full Day Leave">Full Day</option>
 								<option value="Half Day Leave">Half Day</option>
-								<option value="Short Leave">Short Leave</option>
 							</select>
 
 						</div>

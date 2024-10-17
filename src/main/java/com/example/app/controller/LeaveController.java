@@ -1,19 +1,20 @@
 package com.example.app.controller;
 
 
+import com.example.app.dto.EmpAttendace;
 import com.example.app.models.Holiday;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.app.models.Leave;
 import com.example.app.service.LeaveService;
+
+import java.time.Month;
+import java.time.Year;
+import java.util.List;
 
 @Controller
 public class LeaveController {
@@ -60,6 +61,13 @@ public class LeaveController {
 		String msg = leaveSer.newHoliday(holiday);
 		model.addAttribute("holidaymsg", msg);
 		return "redirect:/holidays";
+	}
+
+	@RequestMapping("/empattendance")
+	public String attendance(@RequestParam Month month, @RequestParam Year year, Model model){
+		List<List<EmpAttendace>> attendace = leaveSer.allAttendance(month, year);
+		model.addAttribute("attendance");
+		return "redirect:/attendance";
 	}
 
 
